@@ -1,5 +1,5 @@
 # print welcome message
-messsage = 'hello world, Bleach is the best anime of all time'
+messsage = 'Hello World, Bleach is the best Anime of all time'
 print(messsage)
 
 # print the lenght of the string message
@@ -13,4 +13,16 @@ print(messsage[23], messsage[38])
 print(messsage[0:11])
 # which is similar to 
 print(messsage[:11])
+
+# a method is a function that belongs to an object
+# let's look on some of the string method
+# capitalized the first char 
+print(messsage.capitalize())
+# all lowercase
+print(messsage.lower())
+# all uppercase
+print(messsage.upper())
+# count how many l char in the string message
+print(messsage.count('l'))
+
 
