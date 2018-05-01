@@ -25,4 +25,14 @@ print(messsage.upper())
 # count how many l char in the string message
 print(messsage.count('l'))
 
+# let's replace a word in the string
+new_message = messsage.replace('World', 'Universe')
+print(new_message)
 
+# now let's add multiple string and concatenate them together
+# using placeholders and string format
+gretting = 'Hello'
+name = 'my friend'
+my_message = "it's good to see gain!"
+conversation = '{} {}, {}'.format(gretting, name, my_message)
+print(conversation)
