@@ -38,3 +38,15 @@ name = 'my friend'
 my_message = "it's good to see gain!"
 conversation = '{} {}, {}'.format(gretting, name, my_message)
 print(conversation)
+# or even
+my_conversation = f'{gretting} {name.upper()}, {my_message}'
+print(my_conversation)
+
+# now the most interesting one trick when learning python
+# 'dir' function shows you all the attribute and method you 
+# can do with for a variable passed to it.
+print(dir(gretting))
+# 'help' gives you more information, 
+# including what those methods do
+# print(help(str))
+# print(help(str.count))
