@@ -2,13 +2,18 @@
 # Working with Numeric Data
 # Integers and Floats 
 
-# basic arithmetic operation
+#let's set some integer numbers
 num = 4
 num1 = 5
 num2 = 3
 num3 = 3.68
 num4 = -6
-
+# number that get set value of number within a string
+num5 = '86'
+num6 = '28'
+#---------------------------------------------------------------------------------------------#
+# basic arithmetic operation                                                                  #
+#---------------------------------------------------------------------------------------------#
 # addition
 add = num1 + num2
 print(f'{num1} + {num2} =', add)
@@ -38,7 +43,9 @@ print(f'{num1} ** {num2} =', expo)
 modu = num1 % num2
 print(f'{num1} % {num2} =', modu)
 
-# now let's see some method
+#---------------------------------------------------------------------------------------------#
+# now let's see some method                                                                   #
+#---------------------------------------------------------------------------------------------#
 # 'type' shows the datatype
 print(type(num))
 print(type(num3))
@@ -64,6 +71,34 @@ print('round of num3 is:', round(num3))
 print(f'{num1} / {num2}=', div)
 print(f'{num1} / {num2} round to 2 =', round(div, 2))
 
-# comparaison operation: comparaison operators return boolean 'true' or 'false'
-# equal
-print(f'{num1} equal to {num2} ?', num1 == num2)
+#---------------------------------------------------------------------------------------------#
+# comparaison operation: comparaison operators return boolean 'true' or 'false'               #
+#---------------------------------------------------------------------------------------------#
+# equal, a single '=' is assigment like when we set the value of num = 4
+# double equal is for comparaison
+print(f'is {num1} equal to {num2}?', num1 == num2)
+
+# not equal
+print(f'is {num1} not equal to {num2}?', num1 != num2)
+
+# greater than
+print(f'is {num1} greater than {num2}?', num1 > num2)
+
+# less than
+print(f'is {num1} less than {num2}?', num1 < num2)
+
+# greater or equal to
+print(f'is {num1} greater or equal to {num2}?', num1 >= num2)
+
+# less or equal to
+print(f'is {num1} less or equal to {num2}?', num1 <= num2)
+
+#---------------------------------------------------------------------------------------------#
+# casting from srting to integer                                                              #
+#---------------------------------------------------------------------------------------------#
+print(f'num5 value is: {num5} and num6 value is: {num2}', 'num5 + num6 = ', num5 + num6)
+
+# let's cast them
+num_5 = int(num5)
+num_6 = int(num6)
+print(f'num5 value is: {num_5} and num6 value is: {num_6}', 'num5 + num6 = ', num_5 + num_6)
