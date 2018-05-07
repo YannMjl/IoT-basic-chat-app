@@ -9,6 +9,8 @@ pnconfig = PNConfiguration()
 pnconfig.subscribe_key = 'demo'
 pnconfig.publish_key = 'demo'
 
+#
+
 pubnub = PubNub(pnconfig)
 
 
