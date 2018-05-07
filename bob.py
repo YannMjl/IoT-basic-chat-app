@@ -3,13 +3,15 @@ from pubnub.callbacks import SubscribeCallback
 from pubnub.enums import PNStatusCategory
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
+from threading import Thread
 
 pnconfig = PNConfiguration()
 
 pnconfig.subscribe_key = 'demo'
 pnconfig.publish_key = 'demo'
 
-#
+# let assign each user a basic user id for the basic chat app
+pnconfig.uuid = 'Bob'
 
 pubnub = PubNub(pnconfig)
 
@@ -37,7 +39,7 @@ class MySubscribeCallback(SubscribeCallback):
             # Or just use the connected event to confirm you are subscribed for
             # UI / internal notifications, etc
             pubnub.publish().channel("awesomeChannel").message(
-                "hello World! I'm excited about this!!").async(my_publish_callback)
+                "hello World! I'm " + pnconfig.uuid + "!!").async(my_publish_callback)
         elif status.category == PNStatusCategory.PNReconnectedCategory:
             pass
             # Happens as part of our regular operation. This event happens when
@@ -49,9 +51,25 @@ class MySubscribeCallback(SubscribeCallback):
 
     def message(self, pubnub, message):
         msg = message.message
-        print('I got the message:', msg)
-        pass  # Handle new message stored in message.message
+        if type(msg) == dict:
+            if msg.get('from') != pubnub.uuid:
+                print(msg)
+                pass  # Handle new message stored in message.message
+        else:
+            print(msg)
 
+# let create a function to send the message
+
+
+def sendMessage():
+    message = input("Enter:")
+    pubnub.publish().channel("awesomeChannel").message(
+        {"from": pubnub.uuid, "Message": message}).async(my_publish_callback)
+
+
+# let call sendMessage function from the thread
+T = Thread(target=sendMessage)
+T.start()
 
 pubnub.add_listener(MySubscribeCallback())
 pubnub.subscribe().channels('awesomeChannel').execute()
