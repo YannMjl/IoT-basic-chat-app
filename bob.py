@@ -63,8 +63,8 @@ class MySubscribeCallback(SubscribeCallback):
 
 def sendMessage():
     message = input("Enter:")
-    pubnub.publish().channel("awesomeChannel").message(
-        {"from": pubnub.uuid, "Message": message}).async(my_publish_callback)
+    # message({"from": pubnub.uuid, "Message": message})
+    pubnub.publish().channel("awesomeChannel").message(message).async(my_publish_callback)
 
 
 # let call sendMessage function from the thread
