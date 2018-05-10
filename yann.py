@@ -9,6 +9,8 @@ from pubnub.pubnub import PubNub
 from threading import Thread
 
 #----------------------------------------------------------------------------------------------------#
+# initialize the client                                                                              #
+#----------------------------------------------------------------------------------------------------#
 # create pubnub configuration object
 pnconfig = PNConfiguration()
 
@@ -18,15 +20,17 @@ pnconfig.publish_key = 'demo'
 # assugn pubnub channel name
 my_channel = 'awesomeChannel'
 
+pnconfig.ssl = False
+
 # let assign each user a basic user id for the basic chat app
 pnconfig.uuid = 'Yann'
 
 # create pubnub object with pubnub configuration object
 pubnub = PubNub(pnconfig)
-#----------------------------------------------------------------------------------------------------#
-# create publish and subscribe function                                                              #
-#----------------------------------------------------------------------------------------------------#
 
+#----------------------------------------------------------------------------------------------------#
+# adding listenner and publisher and function                                                        #
+#----------------------------------------------------------------------------------------------------#
 def my_publish_callback(envelope, status):
     # Check whether request successfully completed or not
     if not status.is_error():
@@ -83,9 +87,11 @@ T.start()
 
 #----------------------------------------------------------------------------------------------------#
 # add listner object to pubnub object to subscribe it
-pubnub.add_listener(MySubscribeCallback())
+my_listener = MySubscribeCallback()
+pubnub.add_listener(my_listener)
 # subscribe the channel (Runs in background)
-pubnub.subscribe().channels(my_channel).execute()
+while True:
+    pubnub.subscribe().channels(my_channel).execute()
 
 # wait for the listner object to connect to the Broker.Channel
 # MySubscribeCallback().wait_for_connect()
