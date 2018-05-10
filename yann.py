@@ -1,20 +1,31 @@
-# Add PubNub to the file project
+#----------------------------------------------------------------------------------------------------#
+# basic IoT-Chat app on Pubnub with latest Python SDK                                                #
+# import function from standard librairy section: PubNub                                             #
+#----------------------------------------------------------------------------------------------------#
 from pubnub.callbacks import SubscribeCallback
 from pubnub.enums import PNStatusCategory
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 from threading import Thread
 
+#----------------------------------------------------------------------------------------------------#
+# create pubnub configuration object
 pnconfig = PNConfiguration()
 
+# set pubnub publish and subscribe keys
 pnconfig.subscribe_key = 'demo'
 pnconfig.publish_key = 'demo'
+# assugn pubnub channel name
+my_channel = 'awesomeChannel'
 
 # let assign each user a basic user id for the basic chat app
 pnconfig.uuid = 'Yann'
 
+# create pubnub object with pubnub configuration object
 pubnub = PubNub(pnconfig)
-
+#----------------------------------------------------------------------------------------------------#
+# create publish and subscribe function                                                              #
+#----------------------------------------------------------------------------------------------------#
 
 def my_publish_callback(envelope, status):
     # Check whether request successfully completed or not
@@ -25,7 +36,7 @@ def my_publish_callback(envelope, status):
         # because of which request did fail.
         # Request can be resent using: [status retry];
 
-
+# create listner object to read the msg from the Broker/Server
 class MySubscribeCallback(SubscribeCallback):
     def presence(self, pubnub, presence):
         pass  # handle incoming presence data
@@ -38,7 +49,7 @@ class MySubscribeCallback(SubscribeCallback):
             # Connect event. You can do stuff like publish, and know you'll get it.
             # Or just use the connected event to confirm you are subscribed for
             # UI / internal notifications, etc
-            pubnub.publish().channel("awesomeChannel").message(
+            pubnub.publish().channel(my_channel).message(
                 "hello World! I'm " + pnconfig.uuid + "!!").async(my_publish_callback)
         elif status.category == PNStatusCategory.PNReconnectedCategory:
             pass
@@ -61,12 +72,31 @@ class MySubscribeCallback(SubscribeCallback):
 # let create a function to send the message
 def sendMessage():
     message = input("Enter:")
+    # publish the data to the mentioned channel
     # message({"from": pubnub.uuid, "Message": message})
-    pubnub.publish().channel("awesomeChannel").message(message).async(my_publish_callback)
+    pubnub.publish().channel(my_channel).message(
+        {"from": pubnub.uuid, "Message": message}).async(my_publish_callback)
 
 # let call sendMessage function from the thread
 T = Thread(target=sendMessage)
 T.start()
 
+#----------------------------------------------------------------------------------------------------#
+# add listner object to pubnub object to subscribe it
 pubnub.add_listener(MySubscribeCallback())
-pubnub.subscribe().channels('awesomeChannel').execute()
+# subscribe the channel (Runs in background)
+pubnub.subscribe().channels(my_channel).execute()
+
+# wait for the listner object to connect to the Broker.Channel
+# MySubscribeCallback().wait_for_connect()
+# print confirmation msg
+# print('connected')
+
+# publish the data to the mentioned channel
+# pubnub.publish().channel(channel).message(data).sync()
+
+# while True:                                                      # Infinite loop
+#    result = MySubscribeCallback.wait_for_message_on(my_channel) # Read the new msg on the channel
+#    print(result.message)                                        # print the new msg
+
+#----------------------------------------------------------------------------------------------------#
