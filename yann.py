@@ -90,8 +90,7 @@ T.start()
 my_listener = MySubscribeCallback()
 pubnub.add_listener(my_listener)
 # subscribe the channel (Runs in background)
-while True:
-    pubnub.subscribe().channels(my_channel).execute()
+pubnub.subscribe().channels(my_channel).execute()
 
 # wait for the listner object to connect to the Broker.Channel
 # MySubscribeCallback().wait_for_connect()
