@@ -1,6 +1,8 @@
-# Python 3.6 Tutorial for Beginners
-# Working with Numeric Data
-# Integers and Floats 
+#---------------------------------------------------------------------------------------------#
+# Python 3.6 Tutorial for Beginners                                                           #
+# Working with Numeric Data                                                                   #
+# Integers and Floats                                                                         # 
+#---------------------------------------------------------------------------------------------#
 
 #let's set some integer numbers
 num = 4
@@ -102,3 +104,5 @@ print(f'num5 value is: {num5} and num6 value is: {num2}', 'num5 + num6 = ', num5
 num_5 = int(num5)
 num_6 = int(num6)
 print(f'num5 value is: {num_5} and num6 value is: {num_6}', 'num5 + num6 = ', num_5 + num_6)
+
+#---------------------------------------------------------------------------------------------#

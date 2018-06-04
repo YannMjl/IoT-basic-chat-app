@@ -1,5 +1,8 @@
+#---------------------------------------------------------------------------------------------#
 # Python 3.6 Tutorial for Beginners
-# Working with Textual Data 
+# Working with Textual Data
+#---------------------------------------------------------------------------------------------#
+
 # print welcome message
 messsage = 'Hello World, Bleach is the best Anime of all time'
 print(messsage)
@@ -50,3 +53,5 @@ print(dir(gretting))
 # including what those methods do
 # print(help(str))
 # print(help(str.count))
+
+#---------------------------------------------------------------------------------------------#
