@@ -31,6 +31,8 @@ pubnub = PubNub(pnconfig)
 #----------------------------------------------------------------------------------------------------#
 # adding listenner and publisher and function                                                        #
 #----------------------------------------------------------------------------------------------------#
+
+
 def my_publish_callback(envelope, status):
     # Check whether request successfully completed or not
     if not status.is_error():
@@ -41,6 +43,8 @@ def my_publish_callback(envelope, status):
         # Request can be resent using: [status retry];
 
 # create listner object to read the msg from the Broker/Server
+
+
 class MySubscribeCallback(SubscribeCallback):
     def presence(self, pubnub, presence):
         pass  # handle incoming presence data
@@ -67,19 +71,22 @@ class MySubscribeCallback(SubscribeCallback):
     def message(self, pubnub, message):
         msg = message.message
         if type(msg) == dict:
-            if msg.get('from') != pubnub.uuid:   
+            if msg.get('from') != pubnub.uuid:
                 print(msg)
                 pass  # Handle new message stored in message.message
         else:
             print(msg)
 
 # let create a function to send the message
+
+
 def sendMessage():
     message = input("Enter:")
     # publish the data to the mentioned channel
     # message({"from": pubnub.uuid, "Message": message})
     pubnub.publish().channel(my_channel).message(
         {"from": pubnub.uuid, "Message": message}).async(my_publish_callback)
+
 
 # let call sendMessage function from the thread
 T = Thread(target=sendMessage)
