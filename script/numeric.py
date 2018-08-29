@@ -10,6 +10,7 @@ num1 = 5
 num2 = 3
 num3 = 3.68
 num4 = -6
+
 # number that get set value of number within a string
 num5 = '86'
 num6 = '28'
@@ -69,6 +70,7 @@ print('Absolute value of num4 is: ', abs(num4))
 # rouding
 print('num3 is:', num3)
 print('round of num3 is:', round(num3))
+
 # set how many digit we want to round to
 print(f'{num1} / {num2}=', div)
 print(f'{num1} / {num2} round to 2 =', round(div, 2))
