@@ -16,6 +16,7 @@ print(messsage[23], messsage[38])
 # print a range of charactere in the string
 # this technic is called slicing
 print(messsage[0:11])
+
 # which is similar to
 print(messsage[:11])
 
@@ -23,10 +24,13 @@ print(messsage[:11])
 # let's look on some of the string method
 # capitalized the first char
 print(messsage.capitalize())
+
 # all lowercase
 print(messsage.lower())
+
 # all uppercase
 print(messsage.upper())
+
 # count how many l char in the string message
 print(messsage.count('l'))
 
